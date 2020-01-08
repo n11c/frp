@@ -15,4 +15,4 @@ COPY --from=build /frp/bin/frpc /frpc
 
 WORKDIR /
 
-CMD ["/frpc"]
+ENTRYPOINT ["/frpc"]

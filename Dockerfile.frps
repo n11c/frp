@@ -17,4 +17,4 @@ WORKDIR /
 
 EXPOSE 80 443 6000 7000 7500
 
-CMD ["/frps"]
+ENTRYPOINT ["/frps"]
