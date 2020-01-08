@@ -1,0 +1,18 @@
+FROM golang:1.12 as build
+
+COPY . /frp
+WORKDIR /frp
+
+RUN make frpc
+
+# ------
+
+FROM alpine:3.11
+
+RUN apk --no-cache add bash libc6-compat tzdata
+
+COPY --from=build /frp/bin/frpc /frpc
+
+WORKDIR /
+
+CMD ["/frpc"]
