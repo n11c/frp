@@ -1,0 +1,31 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: build-frps
+    image: plugins/docker
+    settings:
+      repo: n11c/frps
+      dockerfile: Dockerfile.frps
+      username:
+        from_secret: REGISTRY_USER
+      password:
+        from_secret: REGISTRY_PASSWORD
+      tags:
+        - latest
+
+  - name: build-frpc
+    image: plugins/docker
+    settings:
+      repo: n11c/frpc
+      dockerfile: Dockerfile.frpc
+      username:
+        from_secret: REGISTRY_USER
+      password:
+        from_secret: REGISTRY_PASSWORD
+      tags:
+        - latest
+
+trigger:
+  branch:
+    - docker-build
